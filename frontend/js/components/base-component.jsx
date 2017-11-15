@@ -27,13 +27,18 @@
 */
 
 import React from 'react';
-import { SigninFormPanelContainer } from 'commons/components/signin-form-panel';
 import { connect } from 'react-redux';
+import { SigninFormPanelContainer } from 'commons/components/signin-form-panel';
+import { ChangePasswordFormPanel } from './change-password-form-panel';
 
 export class BaseComponent extends React.Component {
 
   static propTypes = {
     sessionState: React.PropTypes.string
+  }
+
+  executeSave(password, password_verify) {
+    console.log(password, password_verify);
   }
 
   renderValidationIndicator() {
@@ -47,7 +52,7 @@ export class BaseComponent extends React.Component {
   renderMainPanel() {
     return (
       <div>
-        Ok.
+        <ChangePasswordFormPanel title="Salasanan vaihto" onSave={this.executeSave.bind(this)}/>
       </div>
     );
   }
