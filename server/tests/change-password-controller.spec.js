@@ -25,27 +25,21 @@
 * for the JavaScript code in this file.
 *
 */
-import { Map } from 'immutable';
-import { EXECUTE_CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE } from '../ui-actions';
 
-const INITIAL_STATE = Map({
-  state: 'READY'
+import request from 'supertest';
+import HttpStatus from 'http-status-codes';
+import { changePasswordController } from '../change-password-controller';
+import { createSessionToken } from 'server/session-crypt';
+
+const sessionToken = createSessionToken('test-user', 'test-pass');
+
+describe('Change Password Controller', () => {
+  it('returns 200', (done) => {
+
+    request(changePasswordController)
+      .post('/')
+      .set('Cookie', `sessionToken=${sessionToken}`)
+      .expect(HttpStatus.OK, done);
+      
+  });
 });
-
-export default function ui(state = INITIAL_STATE, action) {
-
-  switch(action.type) {
-    case EXECUTE_CHANGE_PASSWORD: 
-      return state.set('state', 'LOADING');
-
-    case CHANGE_PASSWORD_SUCCESS:
-      return state.set('state', 'SUCCESS');
-
-    case CHANGE_PASSWORD_FAILURE:
-      return state
-        .set('state', 'FAILURE')
-        .set('error', action.error);
-  } 
-
-  return state;
-}

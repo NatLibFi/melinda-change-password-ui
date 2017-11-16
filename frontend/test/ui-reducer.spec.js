@@ -25,27 +25,44 @@
 * for the JavaScript code in this file.
 *
 */
-import { Map } from 'immutable';
-import { EXECUTE_CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE } from '../ui-actions';
 
-const INITIAL_STATE = Map({
-  state: 'READY'
+import {expect} from 'chai';
+import * as actions from '../js/ui-actions';
+import reducer, { INITIAL_STATE } from '../js/root-reducer';
+
+describe('ui reducers', () => {
+
+  it('sets the state to LOADING', () => {
+
+    const state = INITIAL_STATE;
+    
+    let nextState = reducer(state, actions.executeChangePassword());
+
+    expect(nextState.get('ui').toJS()).to.eql({
+      state: 'LOADING'
+    });
+  });
+
+  it('sets the state to SUCCESS', () => {
+
+    const state = INITIAL_STATE;
+    
+    let nextState = reducer(state, actions.changePasswordSuccess());
+
+    expect(nextState.get('ui').toJS()).to.eql({
+      state: 'SUCCESS'
+    });
+  });
+
+  it('sets the state to FAILURE and sets error', () => {
+
+    const state = INITIAL_STATE;
+    
+    let nextState = reducer(state, actions.changePasswordFailure('something'));
+
+    expect(nextState.get('ui').toJS()).to.eql({
+      state: 'FAILURE',
+      error: 'something'
+    });
+  });
 });
-
-export default function ui(state = INITIAL_STATE, action) {
-
-  switch(action.type) {
-    case EXECUTE_CHANGE_PASSWORD: 
-      return state.set('state', 'LOADING');
-
-    case CHANGE_PASSWORD_SUCCESS:
-      return state.set('state', 'SUCCESS');
-
-    case CHANGE_PASSWORD_FAILURE:
-      return state
-        .set('state', 'FAILURE')
-        .set('error', action.error);
-  } 
-
-  return state;
-}

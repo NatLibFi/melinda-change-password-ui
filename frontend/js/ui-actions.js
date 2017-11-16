@@ -28,13 +28,12 @@ export function changePassword(password, password_verify) {
       .then(() => {
         dispatch(changePasswordSuccess());
       }).catch(exceptCoreErrors((error) => {
-
         if (error instanceof FetchNotOkError) {
           switch (error.response.status) {
             case HttpStatus.INTERNAL_SERVER_ERROR: return dispatch(changePasswordFailure('Salasanan vaihdossa tapahtui virhe.'));
           }
         }
-                
+              
         dispatch(changePasswordFailure('There has been a problem with change operation: ' + error.message));
       }));
   };
