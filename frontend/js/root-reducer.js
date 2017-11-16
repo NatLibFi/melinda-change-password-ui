@@ -30,6 +30,7 @@ import { Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { RESET_STATE } from 'commons/constants/action-type-constants';
 import session from 'commons/reducers/session-reducer';
+import ui from './reducers/ui-reducer';
 
 export default function reducer(state = Map(), action) {
   if (action.type === RESET_STATE) {
@@ -41,4 +42,5 @@ export default function reducer(state = Map(), action) {
 
 export const combinedRootReducer = combineReducers({
   session,
+  ui
 });

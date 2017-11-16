@@ -26,29 +26,40 @@
 *
 */
 
-'use strict';
 import express from 'express';
-import path from 'path';
-import { logger, expressWinston } from 'server/logger';
-import { readEnvironmentVariable } from 'server/utils';
-import { sessionController } from 'server/session-controller';
-import { changePasswordController } from './change-password-controller';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import { readEnvironmentVariable, corsOptions } from 'server/utils';
+import { readSessionMiddleware } from 'server/session-controller';
 
-//const NODE_ENV = readEnvironmentVariable('NODE_ENV', 'dev');
-const PORT = readEnvironmentVariable('HTTP_PORT', 3001);
+import { logger } from 'server/logger';
 
-const app = express();
+export const changePasswordController = express();
 
-app.use(expressWinston);
-app.use(cookieParser());
+changePasswordController.use(cookieParser());
+changePasswordController.use(bodyParser.json());
+changePasswordController.use(readSessionMiddleware);
+changePasswordController.set('etag', false);
 
-app.use('/session', sessionController);
-app.use('/change_password', changePasswordController);
+changePasswordController.options('/', cors(corsOptions)); // enable pre-flight
 
-app.use(express.static(path.resolve(__dirname, 'public')));
+changePasswordController.post('/', cors(corsOptions), requireSession, (req, res) => {
+  console.log(req.body);
 
-const server = app.listen(PORT, () => logger.log('info', `Application started on port ${PORT}`));
+  setTimeout(() => {
+    res.sendStatus(200);
+  }, 1000);
+});
 
-server.timeout = 1800000; // Half an hour
 
+function requireSession(req, res, next) {
+  const username = req.session.username;
+  const password = req.session.password;
+
+  if (username && password) {
+    return next();
+  } else {
+    res.sendStatus(HttpStatus.UNAUTHORIZED);
+  }
+}

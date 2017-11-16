@@ -115,53 +115,90 @@ export class ChangePasswordFormPanel extends React.Component {
     return !this.state.form_valid ? 'disabled': '';
   }
 
+  renderSuccessPanel() {
+
+    return (
+      <div className="card-content">
+        <p>Salasanan vaihto onnistui.</p>
+
+        <div className="spacer" />
+
+        <div className="right-align">
+          <button className="btn waves-effect waves-light" type="submit" name="action" onClick={this.props.removeSession}>Kirjaudu ulos
+            <i className="material-icons right">send</i>
+          </button>
+        </div>
+      </div> 
+    )
+  }
+
+  renderErrorMessage() {
+    if (this.props.error) {
+      return (
+        <p>{this.props.error}</p>
+      );
+    }
+    else if (!this.state.password_active && !this.state.password_verify_active && !this.state.passwords_match) {
+      return (
+        <p>Salasanat eivät täsmää.</p>
+      );
+    }
+  }
+
+  renderForm() {
+    const { 
+      passwordLabel = 'Salasana', 
+      passwordVerifyLabel = 'Salasana uudelleen', 
+      saveButtonLabel = 'Tallenna' 
+    } = this.props;
+
+    const { password, password_verify, password_verify_active, passwords_match } = this.state;
+
+    return (
+      <div className="card-content">
+       
+        <form>
+          <div className="col s2 offset-s1 input-field">
+            <input id="password" type="password" value={password} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
+            <label htmlFor="password">{passwordLabel}</label>
+          </div>
+
+          <div className="col s2 offset-s1 input-field">
+            <input id="password_verify" type="password" className={classNames({'invalid': !password_verify_active && !passwords_match})} value={password_verify} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
+            <label htmlFor="password_verify">{passwordVerifyLabel}</label>
+          </div>
+
+          <div className="spacer" />
+          {this.renderErrorMessage()}
+          <div className="spacer" />
+
+          <div className="right-align">
+            <button className="btn waves-effect waves-light" type="submit" disabled={this.isSaveButtonDisabled()} name="action" onClick={this.executeSave.bind(this)}>{saveButtonLabel}
+              <i className="material-icons right">send</i>
+            </button>
+          </div>
+        </form>
+      
+      </div>
+    );
+  }
+
   render() {
     const { title } = this.props;
 
-    const passwordLabel = 'Salasana';
-    const passwordVerifyLabel = 'Salasana uudelleen';
-    const saveButtonLabel = 'Tallenna';
-
-    const { password, password_verify, passwords_match, password_active, password_verify_active } = this.state;
-
     return (
-
       <div className="card change-password-form-panel valign">
       
         <div className="card-panel teal lighten-2">
           <h4>{title}</h4>
         </div>
 
-        <div className="card-content">
-         
-          <form>
-            <div className="col s2 offset-s1 input-field">
-              <input id="password" type="password" value={password} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
-              <label htmlFor="password">{passwordLabel}</label>
-            </div>
+        {this.props.state === 'SUCCESS' ? this.renderSuccessPanel() : this.renderForm()}
 
-            <div className="col s2 offset-s1 input-field">
-              <input id="password_verify" type="password" className={classNames({'invalid': !password_verify_active && !passwords_match})} value={password_verify} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
-              <label htmlFor="password_verify">{passwordVerifyLabel}</label>
-            </div>
-
-            <div className="spacer" />
-            {!password_active && !password_verify_active && !passwords_match ? 'Salasanat eivät täsmää' : null}
-            <div className="spacer" />
-
-            <div className="right-align">
-              <button className="btn waves-effect waves-light" type="submit" disabled={this.isSaveButtonDisabled()} name="action" onClick={this.executeSave.bind(this)}>{saveButtonLabel}
-                <i className="material-icons right">send</i>
-              </button>
-            </div>
-          </form>
-        
-        </div>
-
-        {this.props.sessionState === 'SIGNIN_ONGOING' ? this.renderPreloader():''}
-          
+        {this.props.state === 'LOADING' ? this.renderPreloader() :''}    
       </div>
-
-    );
+    )
+    
+   
   }
 }

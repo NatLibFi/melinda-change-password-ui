@@ -28,11 +28,13 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { SigninFormPanelContainer } from 'commons/components/signin-form-panel';
-import { removeSession } from 'commons/action-creators/session-actions';
 
+import { removeSession } from 'commons/action-creators/session-actions';
+import { changePassword } from '../ui-actions';
+import { SigninFormPanelContainer } from 'commons/components/signin-form-panel';
 import { NavBar } from './navbar';
 import { ChangePasswordFormPanel } from './change-password-form-panel';
+
 
 export class BaseComponent extends React.Component {
 
@@ -41,7 +43,7 @@ export class BaseComponent extends React.Component {
   }
 
   executeSave(password, password_verify) {
-    console.log(password, password_verify);
+    this.props.changePassword(password, password_verify);
   }
 
   renderValidationIndicator() {
@@ -56,7 +58,7 @@ export class BaseComponent extends React.Component {
     return (
       <div>
         <NavBar removeSession={this.props.removeSession}/>
-        <ChangePasswordFormPanel title="Salasanan vaihto" onSave={this.executeSave.bind(this)}/>
+        <ChangePasswordFormPanel title="Salasanan vaihto" onSave={this.executeSave.bind(this)} removeSession={this.props.removeSession} state={this.props.state} error={this.props.error} />
       </div>
     );
   }
@@ -77,10 +79,12 @@ export class BaseComponent extends React.Component {
 function mapStateToProps(state) {
   return {
     sessionState: state.getIn(['session', 'state']),
+    state: state.getIn(['ui', 'state']),
+    error: state.getIn(['ui', 'error'])
   };
 }
 
 export const BaseComponentContainer = connect(
-  mapStateToProps, { removeSession }
+  mapStateToProps, { removeSession, changePassword }
 )(BaseComponent);
 

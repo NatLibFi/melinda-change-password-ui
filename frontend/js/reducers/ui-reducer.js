@@ -25,30 +25,28 @@
 * for the JavaScript code in this file.
 *
 */
+import { Map } from 'immutable';
+import { EXECUTE_CHANGE_PASSWORD, CHANGE_PASSWORD_SUCCESS, CHANGE_PASSWORD_FAILURE } from '../ui-actions';
 
-'use strict';
-import express from 'express';
-import path from 'path';
-import { logger, expressWinston } from 'server/logger';
-import { readEnvironmentVariable } from 'server/utils';
-import { sessionController } from 'server/session-controller';
-import { changePasswordController } from './change-password-controller';
-import cookieParser from 'cookie-parser';
+const INITIAL_STATE = Map({
+  state: 'READY',
+  error: null
+});
 
-//const NODE_ENV = readEnvironmentVariable('NODE_ENV', 'dev');
-const PORT = readEnvironmentVariable('HTTP_PORT', 3001);
+export default function ui(state = INITIAL_STATE, action) {
 
-const app = express();
+  switch(action.type) {
+    case EXECUTE_CHANGE_PASSWORD: 
+      return state.set('state', 'LOADING');
 
-app.use(expressWinston);
-app.use(cookieParser());
+    case CHANGE_PASSWORD_SUCCESS:
+      return state.set('state', 'SUCCESS');
 
-app.use('/session', sessionController);
-app.use('/change_password', changePasswordController);
+    case CHANGE_PASSWORD_FAILURE:
+      return state
+        .set('state', 'FAILURE')
+        .set('error', action.error);
+  } 
 
-app.use(express.static(path.resolve(__dirname, 'public')));
-
-const server = app.listen(PORT, () => logger.log('info', `Application started on port ${PORT}`));
-
-server.timeout = 1800000; // Half an hour
-
+  return state;
+}
