@@ -26,7 +26,6 @@
 *
 */
 import React from 'react';
-import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import '../../styles/components/change-password-form-panel.scss';
@@ -35,6 +34,13 @@ export class ChangePasswordFormPanel extends React.Component {
 
   static propTypes = {
     title: React.PropTypes.string.isRequired,
+    passwordLabel: React.PropTypes.string,
+    passwordVerifyLabel: React.PropTypes.string,
+    saveButtonLabel: React.PropTypes.string,
+    onSave: React.PropTypes.func.isRequired,
+    removeSession: React.PropTypes.func.isRequired,
+    state: React.PropTypes.string.isRequired,
+    error: React.PropTypes.string
   }
 
   constructor() {
@@ -62,24 +68,24 @@ export class ChangePasswordFormPanel extends React.Component {
           password_verify: state.password_verify
         },
         [id]: value,
-        [id + "_active"]: true,
+        [id + '_active']: true,
       };
 
       newState.passwords_match = this.verifyPasswords(newState);
       newState.form_valid = this.validateForm(newState);
 
       return newState;
-    })
+    });
   }
 
   blurInput(event) {
     event.persist();
 
-    this.setState((state) => {
+    this.setState(() => {
       const { id } = event.target;
 
       const newState = {
-        [id + "_active"]: false
+        [id + '_active']: false
       };
 
       return newState;
@@ -129,7 +135,7 @@ export class ChangePasswordFormPanel extends React.Component {
           </button>
         </div>
       </div> 
-    )
+    );
   }
 
   renderErrorMessage() {
@@ -197,8 +203,6 @@ export class ChangePasswordFormPanel extends React.Component {
 
         {this.props.state === 'LOADING' ? this.renderPreloader() :''}    
       </div>
-    )
-    
-   
+    );  
   }
 }

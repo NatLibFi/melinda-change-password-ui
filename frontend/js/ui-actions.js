@@ -25,7 +25,7 @@ export function changePassword(password, password_verify) {
 
     return fetch(`${APIBasePath}`, fetchOptions)
       .then(validateResponseStatus)
-      .then(response => {
+      .then(() => {
         dispatch(changePasswordSuccess());
       }).catch(exceptCoreErrors((error) => {
 

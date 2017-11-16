@@ -27,13 +27,12 @@
 */
 
 import express from 'express';
+import HttpStatus from 'http-status-codes';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import { readEnvironmentVariable, corsOptions } from 'server/utils';
+import { corsOptions } from 'server/utils';
 import { readSessionMiddleware } from 'server/session-controller';
-
-import { logger } from 'server/logger';
 
 export const changePasswordController = express();
 
@@ -45,8 +44,6 @@ changePasswordController.set('etag', false);
 changePasswordController.options('/', cors(corsOptions)); // enable pre-flight
 
 changePasswordController.post('/', cors(corsOptions), requireSession, (req, res) => {
-  console.log(req.body);
-
   setTimeout(() => {
     res.sendStatus(200);
   }, 1000);

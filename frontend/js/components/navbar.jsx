@@ -27,7 +27,6 @@
 */
 
 import React from 'react';
-import { removeSession } from 'commons/action-creators/session-actions';
 
 export class NavBar extends React.Component {
 

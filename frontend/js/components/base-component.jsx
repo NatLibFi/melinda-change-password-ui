@@ -39,7 +39,11 @@ import { ChangePasswordFormPanel } from './change-password-form-panel';
 export class BaseComponent extends React.Component {
 
   static propTypes = {
-    sessionState: React.PropTypes.string
+    sessionState: React.PropTypes.string,
+    removeSession: React.PropTypes.func.isRequired,
+    changePassword: React.PropTypes.func.isRequired,
+    state: React.PropTypes.string,
+    error: React.PropTypes.string
   }
 
   executeSave(password, password_verify) {
