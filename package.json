@@ -1,6 +1,6 @@
 {
-  "name": "@natlibfi/melinda-eresource-too",
-  "description": "UI for transforming MARC records",
+  "name": "@natlibfi/melinda-change-password-ui",
+  "description": "UI for changing passwords ",
   "version": "1.0.0",
   "author": {
     "name": "The National Library of Finland"
@@ -9,13 +9,13 @@
     "marc",
     "merge"
   ],
-  "homepage": "https://github.com/natlibfi/melinda-eresource-tool",
+  "homepage": "https://github.com/natlibfi/melinda-change-password-ui",
   "bugs": {
-    "url": "https://github.com/natlibfi/melinda-eresource-tool/issues"
+    "url": "https://github.com/natlibfi/melinda-change-password-ui/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:natlibfi/melinda-eresource-tool.git"
+    "url": "git@github.com:natlibfi/melinda-change-password-ui.git"
   },
   "main": "index.js",
   "scripts": {

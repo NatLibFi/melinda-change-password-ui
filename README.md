@@ -1,4 +1,5 @@
-# UI for transforming MARC records [![NPM Version](https://img.shields.io/npm/v/@natlibfi/melinda-eresource-tool.svg)](https://npmjs.org/package/@natlibfi/melinda-eresource-tool) [![Build Status](https://travis-ci.org/NatLibFi/melinda-eresource-tool.svg?branch=master)](https://travis-ci.org/NatLibFi/melinda-eresource-tool)
+# UI for changing passwords 
+
 ## Building the application
 
 Initialize submodules
