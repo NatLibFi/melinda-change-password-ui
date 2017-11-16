@@ -28,13 +28,13 @@
 
 import { Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
-
+import { RESET_STATE } from 'commons/constants/action-type-constants';
 import session from 'commons/reducers/session-reducer';
 
 export default function reducer(state = Map(), action) {
-  // if (action.type === RESET_STATE) {
-  //   state = Map();
-  // }
+  if (action.type === RESET_STATE) {
+    state = Map();
+  }
 
   return combinedRootReducer(state, action);
 }
