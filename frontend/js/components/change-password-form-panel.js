@@ -30,6 +30,9 @@ import classNames from 'classnames';
 
 import '../../styles/components/change-password-form-panel.scss';
 
+const illegalCharacters = '#';
+const maxLength = 8;
+
 export class ChangePasswordFormPanel extends React.Component {
 
   static propTypes = {
@@ -48,11 +51,14 @@ export class ChangePasswordFormPanel extends React.Component {
 
     this.state = {
       password: '',
-      password_verify: '',
+      password_valid: true,
       password_active: false,
+      password_verify: '',
+      password_verify_valid: true,
       password_verify_active: false,
       passwords_match: true,
-      form_valid: false
+      form_valid: false,
+      form_error: null
     };
   }
 
@@ -71,8 +77,18 @@ export class ChangePasswordFormPanel extends React.Component {
         [id + '_active']: true,
       };
 
-      newState.passwords_match = this.verifyPasswords(newState);
-      newState.form_valid = this.validateForm(newState);
+      const validation = this.validatePassword(value);
+
+      const passwords_match = newState.password === newState.password_verify;
+
+      newState.passwords_match = newState.password.length === 0 || newState.password_verify.length === 0 || passwords_match;
+
+      newState[id + '_valid'] = validation.valid;
+
+      newState.form_valid = validation.valid && passwords_match && newState.password.length > 0 && newState.password_verify.length > 0;
+
+      if (!validation.valid) newState.form_error = validation.error;
+      else newState.form_error = null;
 
       return newState;
     });
@@ -81,7 +97,7 @@ export class ChangePasswordFormPanel extends React.Component {
   blurInput(event) {
     event.persist();
 
-    this.setState(() => {
+    this.setState((state) => {
       const { id } = event.target;
 
       const newState = {
@@ -92,14 +108,25 @@ export class ChangePasswordFormPanel extends React.Component {
     });
   }
 
-  verifyPasswords(state = this.state) {
-    return state.password.length === 0 || state.password_verify.length === 0 || state.password === state.password_verify;
-  }
+  validatePassword(password) {
+    if (password.match(new RegExp(illegalCharacters))) {
+      return {
+        valid: false,
+        error: `Salasanassa kiellettyjä merkkejä (${illegalCharacters})`
+      };
+    }
 
-  validateForm(state = this.state) {
-    return state.password.length > 0 && state.password_verify.length > 0 && state.password === state.password_verify;
-  }
+    if (password.length > 8) {
+      return {
+        valid: false,
+        error: `Salasanan pituus ei saa ylittää ${maxLength} merkkiä`
+      };
+    }
 
+    return {
+      valid: true
+    };
+  }
 
   executeSave(event) {
     event.preventDefault();
@@ -144,9 +171,14 @@ export class ChangePasswordFormPanel extends React.Component {
         <p>{this.props.error}</p>
       );
     }
-    else if (!this.state.password_active && !this.state.password_verify_active && !this.state.passwords_match) {
+    else if (this.state.form_error) {
       return (
-        <p>Salasanat eivät täsmää.</p>
+        <p>{this.state.form_error}</p>
+      );
+    }
+    else if (!this.state.passwords_match) {
+      return (
+        <p>Salasanat eivät täsmää</p>
       );
     }
   }
@@ -158,19 +190,19 @@ export class ChangePasswordFormPanel extends React.Component {
       saveButtonLabel = 'Tallenna' 
     } = this.props;
 
-    const { password, password_verify, password_verify_active, passwords_match } = this.state;
+    const { password, password_valid, password_verify, password_verify_valid, password_verify_active, passwords_match } = this.state;
 
     return (
       <div className="card-content">
        
         <form>
           <div className="col s2 offset-s1 input-field">
-            <input id="password" type="password" value={password} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
+            <input id="password" type="password" className={classNames({'invalid': !password_valid})} value={password} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
             <label htmlFor="password">{passwordLabel}</label>
           </div>
 
           <div className="col s2 offset-s1 input-field">
-            <input id="password_verify" type="password" className={classNames({'invalid': !password_verify_active && !passwords_match})} value={password_verify} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
+            <input id="password_verify" type="password" className={classNames({'invalid': !password_verify_active && !passwords_match || !password_verify_valid})} value={password_verify} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
             <label htmlFor="password_verify">{passwordVerifyLabel}</label>
           </div>
 
