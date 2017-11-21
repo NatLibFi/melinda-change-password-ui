@@ -97,7 +97,7 @@ export class ChangePasswordFormPanel extends React.Component {
   blurInput(event) {
     event.persist();
 
-    this.setState((state) => {
+    this.setState(() => {
       const { id } = event.target;
 
       const newState = {
