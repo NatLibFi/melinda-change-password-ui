@@ -33,8 +33,6 @@ import HttpStatus from 'http-status-codes';
 import * as actions from '../js/ui-actions';
 import { __RewireAPI__ as ActionsRewireAPI } from '../js/ui-actions';
 
-require('sinon-as-promised');
-
 chai.use(sinonChai);
 const expect = chai.expect;
 
