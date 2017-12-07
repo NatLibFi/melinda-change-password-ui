@@ -27,6 +27,8 @@
 */
 
 import React from 'react';
+import PropTypes from 'proptypes';
+
 import classNames from 'classnames';
 
 import '../../styles/components/change-password-form-panel.scss';
@@ -37,14 +39,14 @@ const maxLength = 8;
 export class ChangePasswordFormPanel extends React.Component {
 
   static propTypes = {
-    title: React.PropTypes.string.isRequired,
-    passwordLabel: React.PropTypes.string,
-    passwordVerifyLabel: React.PropTypes.string,
-    saveButtonLabel: React.PropTypes.string,
-    onSave: React.PropTypes.func.isRequired,
-    removeSession: React.PropTypes.func.isRequired,
-    state: React.PropTypes.string.isRequired,
-    error: React.PropTypes.string
+    title: PropTypes.string.isRequired,
+    passwordLabel: PropTypes.string,
+    passwordVerifyLabel: PropTypes.string,
+    saveButtonLabel: PropTypes.string,
+    onSave: PropTypes.func.isRequired,
+    removeSession: PropTypes.func.isRequired,
+    state: PropTypes.string.isRequired,
+    error: PropTypes.string
   }
 
   constructor() {

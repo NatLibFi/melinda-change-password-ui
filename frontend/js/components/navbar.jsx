@@ -27,11 +27,12 @@
 */
 
 import React from 'react';
+import PropTypes from 'proptypes';
 
 export class NavBar extends React.Component {
 
   static propTypes = {
-    removeSession: React.PropTypes.func.isRequired,
+    removeSession: PropTypes.func.isRequired,
   }
 
   componentDidMount() {

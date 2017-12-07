@@ -27,6 +27,8 @@
 */
 
 import React from 'react';
+import PropTypes from 'proptypes';
+
 import { connect } from 'react-redux';
 
 import { removeSession } from 'commons/action-creators/session-actions';
@@ -39,11 +41,11 @@ import { ChangePasswordFormPanel } from './change-password-form-panel';
 export class BaseComponent extends React.Component {
 
   static propTypes = {
-    sessionState: React.PropTypes.string,
-    removeSession: React.PropTypes.func.isRequired,
-    changePassword: React.PropTypes.func.isRequired,
-    state: React.PropTypes.string,
-    error: React.PropTypes.string
+    sessionState: PropTypes.string,
+    removeSession: PropTypes.func.isRequired,
+    changePassword: PropTypes.func.isRequired,
+    state: PropTypes.string,
+    error: PropTypes.string
   }
 
   executeSave(password, password_verify) {
