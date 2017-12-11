@@ -107,8 +107,8 @@ describe('changePasswordController', () => {
       request(changePasswordController)
         .post('/')
         .send({
-          password: '123456789',
-          password_verify: '123456789'
+          password: '12345678901',
+          password_verify: '12345678901'
         })
         .set('Cookie', `sessionToken=${sessionToken}`)
         .expect(HttpStatus.BAD_REQUEST, done);
