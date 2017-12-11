@@ -40,7 +40,7 @@ export const changePasswordController = express();
 const ALEPH_CHANGE_PASSWORD_API_URL = readEnvironmentVariable('ALEPH_CHANGE_PASSWORD_API_URL');
 
 const illegalCharacters = '#';
-const maxLength = 8;
+const maxLength = 10;
 
 changePasswordController.use(cookieParser());
 changePasswordController.use(bodyParser.json());
@@ -107,7 +107,7 @@ function validatePassword(password) {
     };
   }
 
-  if (password.length > 8) {
+  if (password.length > maxLength) {
     return {
       valid: false,
       error: `Salasanan pituus ei saa ylittää ${maxLength} merkkiä`

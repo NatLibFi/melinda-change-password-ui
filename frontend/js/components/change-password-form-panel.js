@@ -32,7 +32,7 @@ import classNames from 'classnames';
 import '../../styles/components/change-password-form-panel.scss';
 
 const illegalCharacters = '#';
-const maxLength = 8;
+const maxLength = 10;
 
 export class ChangePasswordFormPanel extends React.Component {
 
@@ -117,7 +117,7 @@ export class ChangePasswordFormPanel extends React.Component {
       };
     }
 
-    if (password.length > 8) {
+    if (password.length > maxLength) {
       return {
         valid: false,
         error: `Salasanan pituus ei saa ylittää ${maxLength} merkkiä`
