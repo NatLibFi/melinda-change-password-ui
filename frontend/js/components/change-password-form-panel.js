@@ -33,7 +33,8 @@ import classNames from 'classnames';
 
 import '../../styles/components/change-password-form-panel.scss';
 
-const illegalCharacters = '#';
+const passwordValidation = /^[\w$?*!,-.\u{00C4}\u{00E4}\u{00D6}\u{00F6}\u{00C5}\u{00E5}]*$/u;
+const minLength = 8;
 const maxLength = 10;
 
 export class ChangePasswordFormPanel extends React.Component {
@@ -112,10 +113,10 @@ export class ChangePasswordFormPanel extends React.Component {
   }
 
   validatePassword(password) {
-    if (password.match(new RegExp(illegalCharacters))) {
+    if (password.length < minLength) {
       return {
         valid: false,
-        error: `Salasanassa kiellettyjä merkkejä (${illegalCharacters})`
+        error: `Salasanan oltava vähintään ${minLength} merkkiä`
       };
     }
 
@@ -123,6 +124,13 @@ export class ChangePasswordFormPanel extends React.Component {
       return {
         valid: false,
         error: `Salasanan pituus ei saa ylittää ${maxLength} merkkiä`
+      };
+    }
+
+    if (!password.match(passwordValidation)) {
+      return {
+        valid: false,
+        error: `Salasanassa kiellettyjä merkkejä`
       };
     }
 

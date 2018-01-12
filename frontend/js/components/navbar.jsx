@@ -52,7 +52,7 @@ export class NavBar extends React.Component {
 
     return (
     <div className="navbar-fixed">
-        <nav class="teal lighten-2"> 
+        <nav className="teal lighten-2"> 
           <div className="nav-wrapper">
             
             <ul id="nav" className="right">
