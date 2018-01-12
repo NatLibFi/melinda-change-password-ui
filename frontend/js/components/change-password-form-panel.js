@@ -154,7 +154,7 @@ export class ChangePasswordFormPanel extends React.Component {
   renderSuccessPanel() {
 
     return (
-      <div className="card-content">
+      <div>
         <p>Salasanan vaihto onnistui.</p>
 
         <div className="spacer" />
@@ -196,31 +196,30 @@ export class ChangePasswordFormPanel extends React.Component {
     const { password, password_valid, password_verify, password_verify_valid, password_verify_active, passwords_match } = this.state;
 
     return (
-      <div className="card-content">
-       
-        <form>
-          <div className="col s2 offset-s1 input-field">
-            <input id="password" type="password" className={classNames({'invalid': !password_valid})} value={password} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
-            <label htmlFor="password">{passwordLabel}</label>
-          </div>
-
-          <div className="col s2 offset-s1 input-field">
-            <input id="password_verify" type="password" className={classNames({'invalid': !password_verify_active && !passwords_match || !password_verify_valid})} value={password_verify} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
-            <label htmlFor="password_verify">{passwordVerifyLabel}</label>
-          </div>
-
-          <div className="spacer" />
-          {this.renderErrorMessage()}
-          <div className="spacer" />
-
-          <div className="right-align">
-            <button className="btn waves-effect waves-light" type="submit" disabled={this.isSaveButtonDisabled()} name="action" onClick={this.executeSave.bind(this)}>{saveButtonLabel}
-              <i className="material-icons right">send</i>
-            </button>
-          </div>
-        </form>
       
-      </div>
+      <form>
+        <div className="col s2 offset-s1 input-field">
+          <input id="password" type="password" className={classNames({'invalid': !password_valid})} value={password} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
+          <label htmlFor="password">{passwordLabel}</label>
+        </div>
+
+        <div className="col s2 offset-s1 input-field">
+          <input id="password_verify" type="password" className={classNames({'invalid': !password_verify_active && !passwords_match || !password_verify_valid})} value={password_verify} onChange={this.updatePassword.bind(this)} onBlur={this.blurInput.bind(this)} />
+          <label htmlFor="password_verify">{passwordVerifyLabel}</label>
+        </div>
+
+        <div className="spacer" />
+        {this.renderErrorMessage()}
+        <div className="spacer" />
+
+        <div className="right-align">
+          <button className="btn waves-effect waves-light" type="submit" disabled={this.isSaveButtonDisabled()} name="action" onClick={this.executeSave.bind(this)}>{saveButtonLabel}
+            <i className="material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    
+
     );
   }
 
@@ -228,12 +227,10 @@ export class ChangePasswordFormPanel extends React.Component {
     const { title } = this.props;
 
     return (
-      <div className="card change-password-form-panel valign">
+      <div className="change-password-form-panel valign">
       
-        <div className="card-panel teal lighten-2">
-          <h4>{title}</h4>
-        </div>
-
+        <h4>{title}</h4>
+        
         {this.props.state === 'SUCCESS' ? this.renderSuccessPanel() : this.renderForm()}
 
         {this.props.state === 'LOADING' ? this.renderPreloader() :''}    
