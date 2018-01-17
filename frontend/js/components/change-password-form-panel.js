@@ -130,7 +130,7 @@ export class ChangePasswordFormPanel extends React.Component {
     if (!password.match(passwordValidation)) {
       return {
         valid: false,
-        error: `Salasanassa saa olla pelkästään pieniä ja isoja kirjaimia sekä merkkejä $?*!,-.`
+        error: 'Salasanassa saa olla pelkästään pieniä ja isoja kirjaimia sekä merkkejä $?*!,-.'
       };
     }
 
