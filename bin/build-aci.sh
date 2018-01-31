@@ -41,15 +41,15 @@ $ACBUILD_CMD label add os $ACI_OS
 $ACBUILD_CMD label add arch $ACI_ARCH
 $ACBUILD_CMD label add release $ACI_RELEASE
 
-$ACBUILD_CMD set-working-directory /opt/melinda-eresource-tool/app
-$ACBUILD_CMD set-exec -- /bin/bash -c '/usr/bin/node index.js 2>&1 | tee -a /opt/melinda-eresouce-tool/logs/melinda-eresouce-tool.log'
+$ACBUILD_CMD set-working-directory /opt/melinda-change-password-ui/app
+$ACBUILD_CMD set-exec -- /bin/bash -c '/usr/bin/node index.js 2>&1 | tee -a /opt/melinda-change-password-ui/logs/melinda-change-password-ui.log'
 
-$ACBUILD_CMD mount add logs /opt/melinda-eresouce-tool/logs
-$ACBUILD_CMD mount add --read-only conf /opt/melinda-eresource-tool/conf
+$ACBUILD_CMD mount add logs /opt/melinda-change-password-ui/logs
+$ACBUILD_CMD mount add --read-only conf /opt/melinda-change-password-ui/conf
 
 $ACBUILD_CMD port add http tcp 80
 
-$ACBUILD_CMD copy aci-build/app /opt/melinda-eresource-tool/app
+$ACBUILD_CMD copy aci-build/app /opt/melinda-change-password-ui/app
 
 if [ $ACBUILD_ENGINE == 'chroot' ];then
   $ACBUILD_CMD run --engine chroot -- /bin/bash -c "echo '$(grep -m1 -E ^nameserver /etc/resolv.conf)' > /etc/resolv.conf"
@@ -62,7 +62,7 @@ $ACBUILD_CMD copy aci-build/nodesource.list /etc/apt/sources.list.d/nodesource.l
 $ACBUILD_CMD copy aci-build/nodesource.pref /etc/apt/preferences.d/nodesource.pref
 
 $ACBUILD_CMD run --engine $ACBUILD_ENGINE -- /bin/bash -c 'apt-get -y update && apt-get -y install nodejs'
-$ACBUILD_CMD run --engine $ACBUILD_ENGINE --working-dir /opt/melinda-eresource-tool/app -- /bin/bash -c 'npm install --production'
+$ACBUILD_CMD run --engine $ACBUILD_ENGINE --working-dir /opt/melinda-change-password-ui/app -- /bin/bash -c 'npm install --production'
 
 $ACBUILD_CMD run --engine $ACBUILD_ENGINE -- /bin/bash -c 'apt-get -y update && apt-get -y install tzdata'
 $ACBUILD_CMD run --engine $ACBUILD_ENGINE -- /bin/bash -c 'ln -fs /usr/share/zoneinfo/Europe/Helsinki /etc/localtime'
