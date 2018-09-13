@@ -46,3 +46,5 @@ aci-build
 
 # default dir for merge-action-archive
 merge-action-archive
+
+.env
