@@ -10,7 +10,7 @@
         ["module-resolver", {
           "root": ["."],
           "alias": {
-            "server": "./commons/server"
+            "server": "@natlibfi/melinda-ui-commons/dist/server"
           }
         }]
       ]  
@@ -20,8 +20,8 @@
     ["module-resolver", {
       "root": ["."],
       "alias": {
-        "server": "./melinda-ui-commons/server/",
-        "commons": "./melinda-ui-commons/frontend/js/",
+        "server": "@natlibfi/melinda-ui-commons/dist/server/",
+        "commons": "@natlibfi/melinda-ui-commons/dist/frontend/js/",
       }
     }]
   ]
