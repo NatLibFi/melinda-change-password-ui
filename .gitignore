@@ -40,9 +40,11 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-build
+dist
 tmp
 aci-build
 
 # default dir for merge-action-archive
 merge-action-archive
+
+.env
