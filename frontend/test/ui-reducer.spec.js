@@ -4,7 +4,7 @@
 *
 * UI for changing passwords
 *
-* Copyright (C) 2015-2017 University Of Helsinki (The National Library Of Finland)
+* Copyright (C) 2015-2019 University Of Helsinki (The National Library Of Finland)
 *
 * This file is part of melinda-change-password-ui
 *
