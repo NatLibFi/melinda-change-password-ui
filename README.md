@@ -1,4 +1,4 @@
-# UI for changing passwords 
+# UI for changing user's own password in Melinda [![Build Status](https://travis-ci.org/NatLibFi/melinda-asetukset-salasana.svg)](https://travis-ci.org/NatLibFi/melinda-asetukset-salasana) 
 
 ## Building the application
 
@@ -35,6 +35,6 @@ This will start webpack-dev-server for frontend codebase and nodemon for the bac
 
 ## License and copyright
 
-Copyright (c) 2015-2017 **University Of Helsinki (The National Library Of Finland)**
+Copyright (c) 2015-2019 **University Of Helsinki (The National Library Of Finland)**
 
 This project's source code is licensed under the terms of **GNU Affero General Public License Version 3** or any later version.
