@@ -41,7 +41,7 @@
   },
   "license": "AGPL-3.0+",
   "dependencies": {
-    "@natlibfi/melinda-ui-commons": "^2.0.1",
+    "@natlibfi/melinda-ui-commons": "^2.1.0",
     "babel-eslint": "^7.1.0",
     "body-parser": "^1.18.2",
     "classnames": "^2.2.5",
