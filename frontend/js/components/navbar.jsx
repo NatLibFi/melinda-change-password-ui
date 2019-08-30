@@ -28,6 +28,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import melindaLogo from '../../images/Melinda-logo-white.png';
 
 export class NavBar extends React.Component {
 
@@ -54,7 +55,10 @@ export class NavBar extends React.Component {
     <div className="navbar-fixed">
         <nav className="teal lighten-2"> 
           <div className="nav-wrapper">
-            
+            <img 
+             className="mt-logo" 
+             src={melindaLogo}
+            />
             <ul id="nav" className="right">
               <li><a className="dropdown-navbar dropdown-button-menu" href="#" data-activates="mainmenu"><i className="material-icons">more_vert</i></a></li>
             </ul>
