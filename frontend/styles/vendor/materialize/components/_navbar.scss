@@ -21,6 +21,11 @@ nav {
     background-image: linear-gradient(to right, #305d6d, #7bb9ce);
     position: relative;
     height: 100%;
+
+    .heading {
+      margin-left: 1em;
+      font-size: 1.5em;
+    }
   }
 
   .mt-logo {
@@ -121,6 +126,21 @@ nav {
 
       &:hover {
         background-color: rgba(0,0,0,.1);
+      }
+    }
+
+    .user-name-menu-item {
+      flex-wrap: wrap;
+      text-align: center;
+      font-size: $navbar-font-size;
+      color: #000000;
+      font-weight: bold;
+      background-color: rgba(0,0,0,.1);
+      padding: 14px 16px;
+      cursor: default;
+      
+      &:hover {
+        background: rgba(0,0,0,.1); // removes flicker when mouseover
       }
     }
 

@@ -40,7 +40,6 @@ const maxLength = 10;
 export class ChangePasswordFormPanel extends React.Component {
 
   static propTypes = {
-    title: PropTypes.string.isRequired,
     passwordLabel: PropTypes.string,
     passwordVerifyLabel: PropTypes.string,
     saveButtonLabel: PropTypes.string,
@@ -232,12 +231,8 @@ export class ChangePasswordFormPanel extends React.Component {
   }
 
   render() {
-    const { title } = this.props;
-
     return (
       <div className="change-password-form-panel valign">
-      
-        <h4>{title}</h4>
         
         {this.props.state === 'SUCCESS' ? this.renderSuccessPanel() : this.renderForm()}
 

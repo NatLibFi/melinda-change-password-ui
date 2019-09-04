@@ -39,6 +39,7 @@ import { validateSession } from 'commons/action-creators/session-actions';
 import { BaseComponentContainer } from './components/base-component';
 import rootReducer from './root-reducer';
 import { App } from './components/app';
+import 'material-design-icons-iconfont';
 
 const loggerMiddleware = createLogger();
 
