@@ -29,7 +29,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { removeSession } from 'commons/action-creators/session-actions';
 import { changePassword } from '../ui-actions';
 import { SigninFormPanelContainer } from 'commons/components/signin-form-panel';
@@ -45,7 +44,7 @@ export class BaseComponent extends React.Component {
     changePassword: PropTypes.func.isRequired,
     state: PropTypes.string,
     error: PropTypes.string,
-    userinfo: PropTypes.object
+    userInfo: PropTypes.object
   }
 
   executeSave(password, password_verify) {
@@ -61,7 +60,7 @@ export class BaseComponent extends React.Component {
   }
 
   renderMainPanel() {
-    const firstName = _.head(_.get(this.props.userinfo, 'name', '').split(' '));
+    const firstName = (this.props.userInfo.name || '').split(' ').shift();
 
     return (
       <div>
@@ -91,7 +90,7 @@ export class BaseComponent extends React.Component {
 function mapStateToProps(state) {
   return {
     sessionState: state.getIn(['session', 'state']),
-    userinfo: state.getIn(['session', 'userinfo']),
+    userInfo: state.getIn(['session', 'userinfo']),
     state: state.getIn(['ui', 'state']),
     error: state.getIn(['ui', 'error'])
   };
