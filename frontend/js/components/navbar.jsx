@@ -28,6 +28,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../styles/components/navbar.scss';
 import melindaLogo from '../../images/Melinda-logo-white.png';
 
 export class NavBar extends React.Component {
@@ -66,11 +67,16 @@ export class NavBar extends React.Component {
               <li className="heading">{appTitle}</li>
             </ul>     
             <ul id="nav" className="right">
-              <li><a className="dropdown-navbar dropdown-button-menu" href="#" data-activates="mainmenu"><i className="material-icons">account_circle</i></a></li>
+              <li> 
+                <a
+                  className="dropdown-navbar dropdown-button-menu" 
+                  href="#" data-activates="mainmenu">
+                   <i className="material-icons">account_circle</i>
+                </a>
+              </li>
             </ul>
           </div>
         </nav>
-
         <ul id='mainmenu' className='dropdown-content'>
           <li className="user-name-menu-item">{username ? username : ''}</li>
           <li className="divider" />
