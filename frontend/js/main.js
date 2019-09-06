@@ -34,11 +34,12 @@ import { createLogger } from 'redux-logger';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import * as Cookies from 'js-cookie';
-
 import { validateSession } from 'commons/action-creators/session-actions';
 import { BaseComponentContainer } from './components/base-component';
 import rootReducer from './root-reducer';
 import { App } from './components/app';
+import 'material-design-icons-iconfont';
+import 'materialize-css';
 
 const loggerMiddleware = createLogger();
 

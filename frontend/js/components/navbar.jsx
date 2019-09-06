@@ -28,11 +28,15 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../styles/components/navbar.scss';
+import melindaLogo from '../../images/Melinda-logo-white.png';
 
 export class NavBar extends React.Component {
 
   static propTypes = {
     removeSession: PropTypes.func.isRequired,
+    appTitle: PropTypes.string.isRequired,
+    username: PropTypes.string
   }
 
   componentDidMount() {
@@ -49,19 +53,32 @@ export class NavBar extends React.Component {
 
   }
   render() {
+    const { username, appTitle } = this.props;
 
     return (
     <div className="navbar-fixed">
-        <nav className="teal lighten-2"> 
+        <nav> 
           <div className="nav-wrapper">
-            
+            <img 
+             className="mt-logo left" 
+             src={melindaLogo}
+            />
+            <ul id="nav" className="left">
+              <li className="heading">{appTitle}</li>
+            </ul>     
             <ul id="nav" className="right">
-              <li><a className="dropdown-navbar dropdown-button-menu" href="#" data-activates="mainmenu"><i className="material-icons">more_vert</i></a></li>
+              <li> 
+                <a
+                  className="dropdown-navbar dropdown-button-menu" 
+                  href="#" data-activates="mainmenu">
+                   <i className="material-icons">account_circle</i>
+                </a>
+              </li>
             </ul>
           </div>
         </nav>
-
         <ul id='mainmenu' className='dropdown-content'>
+          <li className="user-name-menu-item">{username ? username : ''}</li>
           <li className="divider" />
           <li><a href="#" onClick={this.props.removeSession}>Kirjaudu ulos</a></li>
         </ul>
