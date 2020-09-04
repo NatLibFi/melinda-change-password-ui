@@ -99,7 +99,7 @@
     "json-loader": "^0.5.7",
     "json-similarity": "https://github.com/NatLibFi/json-similarity.git#c70cb1ac3270143440c6450463e4ffdee2a15ce2",
     "mocha": "^4.0.1",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.13.1",
     "node-uuid": "^1.4.8",
     "nodemon": "^1.12.5",
     "postcss-loader": "^2.0.9",
